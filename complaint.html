@@ -81,9 +81,9 @@ button:hover {
 <div class="container">
     <h2>Query details</h2>
 
-    <form action="save_complaint.php" method="POST" enctype="multipart/form-data" onsubmit="return validateForm()"></form>
+    <form action="save_complaint.php" method="POST" enctype="multipart/form-data" onsubmit="return validateForm()">
         <label>Complaint type:</label>
-        <select name ="type" id="name">
+        <select name ="type" id="type">
             <option value="">Select Type</option>
             <option>Academic</option>
             <option>Lab</option>
@@ -101,11 +101,12 @@ button:hover {
          <button type="submit">Submit</button><br><br>
     </form>
          <button><a href="submit.html">Previous</a></button>
+</form>
 </div>
 
 <script>
 function validateForm() {
-    let name = document.getElementById("name").value;
+    let name = document.getElementById("type").value;
     let loc = document.getElementById("loc").value;
     let desc = document.getElementById("desc").value;
 
