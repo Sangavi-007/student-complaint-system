@@ -5,13 +5,27 @@
     <meta name = "viewport" content = "width = device-width, initial scale = 1.0">
     <title>Student Complaint Management System</title>
     <style>
-      body{
-        background-color: black;
+     body{
+        margin: 0;
+        padding: 0;
         border: 2px solid whitesmoke;
+        box-sizing: border-box;
+        min-height: 100vh;
+      }
+      .background{
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: url("clg.jpeg") no-repeat center/cover;
+        filter: blur(5px);  
+        z-index: -1;
       }
       h1{
         text-align: center;
-        color: rgba(20, 172, 232, 0.956);
+        color: white;
+        text-shadow: 0 1px 3px rgba(0,0,0,0.8);
         margin: 300px 300px 200px;
       }
       p, pre{
@@ -20,6 +34,7 @@
       p{
         font-size: larger;
         color: azure;
+        text-shadow: 0 1px 3px rgba(0,0,0,0.8);
       }
       a{
         color:rgb(113, 220, 247);
@@ -31,11 +46,11 @@
     </style>
   </head>
   <body>
-    <h1>Student Complaint Management System</h1>
+    <div class="background"><h1>Student Complaint Management System</h1>
     <p><strong> You can submit complaints and track their status easily.</strong></p>
     <pre>
     <h2><a href = "submit.html" >Submit Complaint </a> <a href = "track.html">Check status </a> <a href = "admin.html">Admin login </a></h2>
     </pre>
-
+    </div>
   </body>
 </html>
