@@ -105,11 +105,10 @@ button:hover {
 <script>
 function validateForm() {
     let name = document.getElementById("name").value;
-    let sub = document.getElementById("sub").value;
     let loc = document.getElementById("loc").value;
     let desc = document.getElementById("desc").value;
 
-    if (name === "" || sub === "" || loc === "" || desc === "") {
+    if (name === "" || loc === "" || desc === "") {
         alert("All fields are required!");
         return false;
     }
