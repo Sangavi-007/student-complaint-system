@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset = "UTF-8">
+    <meta name = "viewport" content = "width=device-width, initial scale = 1.0">
+    <title>Submit Complaint</title>
+    <style>
+        body {
+            font-family: Arial;
+            background: #f2f2f2;
+        }
+        .container {
+            width: 400px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            margin-top: 50px;
+            border-radius: 10px;
+        }
+        #name, #type, #dept{
+            width: 300px;
+        }
+        #desc{
+            width: 300px;
+        }
+        h2 {
+            text-align: center;
+        }
+        input, select, textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background: blue;
+            color: white;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Submit Complaint</h2>
+
+    <form onsubmit="return validateForm()">
+        <label>Register number :</label>
+        <input type="number" id="name" >
+
+        <label>Department:</label><br>
+        <select id="dept">
+            <option>IST</option>
+            <option>CSE</option>
+            <option>ECE</option>
+            <option>EEE</option>
+            <option>Others</option>
+        </select><br>
+        <label>Complaint type:</label>
+        <select id="type">
+            <option>Academic</option>
+            <option>Lab</option>
+            <option>Hostel</option>
+            <option>Transport</option>
+            <option>Classroom / Infrastructure</option>
+           
+        </select>
+
+        <textarea id="desc" placeholder="Enter your complaint" maxlength="50px"></textarea>
+
+        <button type="submit">Submit</button>
+    </form>
+</div>
+
+<script>
+function validateForm() {
+    let name = document.getElementById("name").value;
+    let dept = document.getElementById("dept").value;
+    let type = document.getElementById("type").value;
+    let desc = document.getElementById("desc").value;
+
+    if (name === "" || dept === "" || type === "" || desc === "") {
+        alert("All fields are required!");
+        return false;
+    }
+
+    alert("Complaint submitted successfully!");
+    return true;
+}
+</script>
+
+</body>
+</html>
