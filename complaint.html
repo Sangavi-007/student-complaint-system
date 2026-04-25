@@ -81,9 +81,9 @@ button:hover {
 <div class="container">
     <h2>Query details</h2>
 
-    <form onsubmit="return validateForm()">
+    <form action="save_complaint.php" method="POST" enctype="multipart/form-data" onsubmit="return validateForm()"></form>
         <label>Complaint type:</label>
-        <select id="name">
+        <select name ="type" id="name">
             <option value="">Select Type</option>
             <option>Academic</option>
             <option>Lab</option>
@@ -92,12 +92,12 @@ button:hover {
             <option>Classroom / Infrastructure</option>
         </select>
         <label>Location:</label><br>
-         <input type="text" id="loc" placeholder= "Ex: Kp,room no:102">
+         <input type="text" name ="location" id="loc" placeholder= "Ex: Kp,room no:102">
         <label>Complaint Description :</label>
-         <textarea id="desc" placeholder="Complete explanation of complaint"></textarea>
+         <textarea id="desc" name ="description" placeholder="Complete explanation of complaint"></textarea>
         <label>Attachment:</label><br>
         <small>File format: PDF,JPG,PNG (Max size:2MB)</small>
-         <input type="file" accept=".pdf,.jpg,.png">
+         <input type="file" name = "file" accept=".pdf,.jpg,.png">
          <button type="submit">Submit</button><br><br>
     </form>
          <button><a href="submit.html">Previous</a></button>
