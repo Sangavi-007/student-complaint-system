@@ -3,8 +3,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 $conn = new mysqli("localhost", "root", "", "complaint_system");
 
-if (!$conn) {
-    die("Connection failed");
+if ($conn->connect_error) {
+    die("Connection failed:" . $conn->connect_error);
 }
 
 if (!isset($_POST['name'], $_POST['regno'], $_POST['email'], $_POST['dept'], $_POST['contact'])) {
