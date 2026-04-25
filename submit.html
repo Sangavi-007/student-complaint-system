@@ -77,11 +77,11 @@ button:hover {
     </style>
 </head>
 <body>
-<div class = "background"></div>
+<div class = "background">
 <div class="container">
     <h2>Student details</h2>
 
-        <form action="save_student.php" method="POST" onsubmit="return validateForm()"></form>
+        <form action="save_student.php" method="POST" onsubmit="return validateForm()">
         <label>Student name:</label>
         <input type="text" id="name" name="name" placeholder="Ex:Sam">
         <label>Register number :</label>
@@ -102,6 +102,7 @@ button:hover {
         <button type="submit">Submit</button><br><br>
 </form>
         <button><a href="complaint.html">Next</a></button>
+        </div>
 </div>
 
 <script>

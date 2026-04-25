@@ -1,8 +1,14 @@
 <?php
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
 $conn = new mysqli("localhost", "root", "", "complaint_system");
 
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
+if (!$conn) {
+    die("Connection failed");
+}
+
+if (!isset($_POST['name'], $_POST['regno'], $_POST['email'], $_POST['dept'], $_POST['contact'])) {
+    die("Form data missing");
 }
 
 $name = $_POST['name'];
@@ -21,4 +27,8 @@ if ($conn->query($sql) === TRUE) {
 }
 
 $conn->close();
+
+} else {
+    echo "Invalid request";
+}
 ?>
