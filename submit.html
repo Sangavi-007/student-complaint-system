@@ -5,6 +5,12 @@
     <meta name = "viewport" content = "width=device-width, initial-scale = 1.0">
     <title>Submit Complaint</title>
     <style>
+    textarea {
+    min-height: 90px;
+}
+*{
+    box-sizing: border-box;
+}
 body {
     background: #eef2f7;
     font-family: Arial, sans-serif;
@@ -23,7 +29,7 @@ body {
  }
 
 .container {
-    width: 350px;
+    width: 450px;
     margin: auto;
     margin-top: 80px;
     background: rgba(255, 255, 255, 0.95);
@@ -44,6 +50,7 @@ input, select, textarea {
     border-radius: 8px;
     border: 1px solid #ccc;
     font-size: 14px;
+    font-family: Arial, sans-serif;
 }
 
 
@@ -72,12 +79,15 @@ button:hover {
 <body>
 <div class = "background"></div>
 <div class="container">
-    <h2>Submit Complaint</h2>
+    <h2>Student details</h2>
 
     <form onsubmit="return validateForm()">
+        <label>Student name:</label>
+        <input type="text" id="name" placeholder="Ex:Sam">
         <label>Register number :</label>
-        <input type="number" id="regno" >
-
+        <input type="number" id="regno" placeholder= "Ex: 2025115001">
+        <label>Email :</label>
+        <input type="email" id="mail" placeholder= "Ex: studentname@gmail.com">
         <label>Department:</label><br>
         <select id="dept">
             <option value="">Select Department</option>
@@ -87,37 +97,27 @@ button:hover {
             <option>EEE</option>
             <option>Others</option>
         </select><br>
-
-        <label>Complaint type:</label>
-        <select id="type">
-            <option value="">Select Type</option>
-            <option>Academic</option>
-            <option>Lab</option>
-            <option>Hostel</option>
-            <option>Transport</option>
-            <option>Classroom / Infrastructure</option>
-           
-        </select>
-
-        <textarea id="desc" placeholder="Enter your complaint" maxlength="50"></textarea>
-
-        <button type="submit">Submit</button>
+        <label>Contact:</label>
+        <input type="number" id="contact" placeholder= "Ex: 9876543210">
+         <button type="submit">Submit</button><br><br>
+         <button><a href="complaint.html">Next</a></button>
     </form>
 </div>
 
 <script>
 function validateForm() {
-    let name = document.getElementById("regno").value;
+    let name = document.getElementById("name").value;
+    let regno = document.getElementById("regno").value;
     let dept = document.getElementById("dept").value;
-    let type = document.getElementById("type").value;
-    let desc = document.getElementById("desc").value;
+    let email = document.getElementById("mail").value;
+    let contact = document.getElementById("contact").value;
 
-    if (name === "" || dept === "" || type === "" || desc === "") {
+    if (name === "" || dept === "" || mail === "" || contact === "" || regno ==="") {
         alert("All fields are required!");
         return false;
     }
 
-    alert("Complaint submitted successfully!");
+    alert("Student details submitted successfully!");
     return true;
 }
 </script>
