@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset = "UTF-8">
+    <meta name = "viewport" content = "width=device-width, initial-scale = 1.0">
+    <title>Sign in</title>
+    <style>
+    textarea {
+    min-height: 90px;
+}
+*{
+    box-sizing: border-box;
+}
+body {
+    background: #eef2f7;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+ .background{
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: url("clg.jpeg") no-repeat center/cover;
+        filter: blur(5px);  
+        z-index: -1;
+ }
+
+.container {
+    width: 500px;
+    margin: auto;
+    margin-top: 80px;
+    background: rgba(255, 255, 255, 0.95);
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+input, select, textarea {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+    font-family: Arial, sans-serif;
+}
+
+
+input:focus, select:focus, textarea:focus {
+    border-color: #007bff;
+    outline: none;
+}
+button {
+    width: 100%;
+    padding: 12px;
+    background: linear-gradient(to right, #0066ff, #00ccff);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button:hover {
+    transform: scale(1.05);
+    background: linear-gradient(to right, #0052cc, #00aaff);
+}
+</style>
+</head>
+<body>
+<div class = "background"></div>
+<div class="container">
+    <h2>Admin Sign up</h2>
+
+    <form action="admin.html" onsubmit="return validateForm()">
+        <label>Full name:</label>
+        <input type="text" id="name" placeholder="Ex:Vijay">
+        <label>Staff ID:</label>
+        <input type="number" id="no" placeholder= "Ex: 12345">
+        <label>Email(college mail preferred) :</label>
+        <input type="email" id="mail" placeholder= "Ex: name@gmail.com">
+        <label>Department:</label><br>
+        <select id="dept">
+            <option value="">Select Department</option>
+            <option>IST</option>
+            <option>CSE</option>
+            <option>ECE</option>
+            <option>EEE</option>
+            <option>Others</option>
+        </select><br>
+        <label>Phone number:</label>
+          <input type="number" id="contact" placeholder= "Ex: 9876543210">
+        <label>Enter password:</label>
+        <input type="password" name="pswd" id="pass">
+        <label>Confirm password:</label>
+        <input type="password" name="pswd" id="cpass">
+        <button type="submit">Submit</button><br><br>
+</form>
+</div>
+
+<script>
+function validateForm() {
+    let name = document.getElementById("name").value;
+    let no = document.getElementById("no").value;
+    let dept = document.getElementById("dept").value;
+    let email = document.getElementById("mail").value;
+    let contact = document.getElementById("contact").value;
+    let password = document.getElementById("pass").value;
+    let cpassword = document.getElementById("cpass").value;
+    if (name === "" || dept === "" || mail === "" || contact === "" || no ===""|| password ===""|| cpassword ==="") {
+        alert("All fields are required!");
+        return false;
+    }
+    if(password!=cpassword){
+        alert("Incorrect password");
+    }
+    alert("Details submitted successfully!");
+    return true;
+}
+</script>
+
+</body>
+</html>
