@@ -1,135 +1,180 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Dashboard</title>
+<meta charset="UTF-8">
+<title>Admin Dashboard</title>
 
-    <style>
-        body {
-            margin: 0;
-            font-family: Arial;
-            background: #eef2f7;
-        }
+<style>
+body {
+    margin: 0;
+    font-family: 'Segoe UI', Arial;
+    background: #eef2f7;
+}
 
-        .navbar {
-            background: #2575fc;
-            color: white;
-            padding: 15px;
-            text-align: center;
-            font-size: 20px;
-        }
+.navbar {
+    background: linear-gradient(to right, #6a11cb, #2575fc);
+    color: white;
+    padding: 18px;
+    text-align: center;
+    font-size: 22px;
+    font-weight: bold;
+}
 
-        .container {
-            padding: 20px;
-        }
+.container {
+    max-width: 1000px;
+    margin: 30px auto;
+    padding: 10px;
+}
 
-        .card {
-            background: white;
-            padding: 20px;
-            margin: 15px 0;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-        }
+.card {
+    background: white;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+}
 
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
+h3 {
+    margin-bottom: 15px;
+}
 
-        th, td {
-            padding: 10px;
-            border-bottom: 1px solid #ccc;
-            text-align: left;
-        }
+select {
+    padding: 8px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+}
 
-        select {
-            padding: 5px;
-            border-radius: 5px;
-        }
+/* TABLE */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+    border-radius: 10px;
+    overflow: hidden;
+}
 
-        button {
-            padding: 10px 15px;
-            border: none;
-            border-radius: 5px;
-            background: #2575fc;
-            color: white;
-            cursor: pointer;
-        }
+th {
+    background: #2575fc;
+    color: white;
+    padding: 12px;
+    text-align: left;
+}
 
-        button:hover {
-            background: #0052cc;
-        }
-    </style>
+td {
+    padding: 12px;
+    border-bottom: 1px solid #eee;
+}
+
+tr:nth-child(even) {
+    background: #f9f9f9;
+}
+
+tr:hover {
+    background: #f1f7ff;
+}
+
+/* status colors */
+.pending {
+    color: red;
+    font-weight: bold;
+}
+.resolved {
+    color: green;
+    font-weight: bold;
+}
+
+</style>
 </head>
 
 <body>
 
-<div class="navbar">
-    Admin Dashboard
-</div>
+<div class="navbar">Admin Dashboard</div>
 
 <div class="container">
 
     <div class="card">
-        <h3>Complaints List</h3>
+        <h3>Filter by Type</h3>
+        <select onchange="filterType(this.value)">
+            <option value="All">All</option>
+            <option>WiFi</option>
+            <option>Classroom</option>
+            <option>Hostel</option>
+            <option>Transport</option>
+            <option>Other</option>
+        </select>
+    </div>
+
+    <div class="card">
+        <h3>Complaints</h3>
 
         <table>
             <thead>
                 <tr>
                     <th>ID</th>
                     <th>Name</th>
+                    <th>Type</th>
                     <th>Complaint</th>
                     <th>Status</th>
                 </tr>
             </thead>
-
-            <tbody id="tableBody">
-                <!-- Data will come from localStorage -->
-            </tbody>
+            <tbody id="tableBody"></tbody>
         </table>
-    </div>
-
-    <div class="card">
-        <button onclick="logout()">Logout</button>
     </div>
 
 </div>
 
 <script>
-function loadComplaints() {
-    let complaints = JSON.parse(localStorage.getItem("complaints")) || [];
-    let table = document.getElementById("tableBody");
+let allComplaints = [];
 
+function loadComplaints() {
+    allComplaints = JSON.parse(localStorage.getItem("complaints")) || [];
+    display(allComplaints);
+}
+
+function display(data) {
+    let table = document.getElementById("tableBody");
     table.innerHTML = "";
 
-    complaints.forEach((c, index) => {
+    data.forEach((c) => {
+        let statusClass = c.status === "Resolved" ? "resolved" : "pending";
+
         let row = `
-            <tr>
-                <td>${c.id}</td>
-                <td>${c.name}</td>
-                <td>${c.complaint}</td>
-                <td>
-                    <select onchange="updateStatus(${index}, this.value)">
-                        <option ${c.status === "Pending" ? "selected" : ""}>Pending</option>
-                        <option ${c.status === "Resolved" ? "selected" : ""}>Resolved</option>
-                    </select>
-                </td>
-            </tr>
-        `;
+        <tr>
+            <td>${c.id}</td>
+            <td>${c.name}</td>
+            <td>${c.type || "-"}</td>
+            <td>${c.complaint || "-"}</td>
+            <td>
+                <select onchange="updateStatus(${c.id}, this.value)" class="${statusClass}">
+                    <option ${c.status==="Pending"?"selected":""}>Pending</option>
+                    <option ${c.status==="Resolved"?"selected":""}>Resolved</option>
+                </select>
+            </td>
+        </tr>`;
         table.innerHTML += row;
     });
 }
 
-function updateStatus(index, newStatus) {
-    let complaints = JSON.parse(localStorage.getItem("complaints")) || [];
-    complaints[index].status = newStatus;
-    localStorage.setItem("complaints", JSON.stringify(complaints));
+function filterType(type) {
+    if (type === "All") {
+        display(allComplaints);
+    } else {
+        let filtered = allComplaints.filter(c => c.type === type);
+        display(filtered);
+    }
 }
 
-function logout() {
-    alert("Logged out!");
-    window.location.href = "login.html"; // change if needed
+function updateStatus(id, status) {
+    let complaints = JSON.parse(localStorage.getItem("complaints")) || [];
+
+    complaints.forEach(c => {
+        if (c.id == id) {
+            c.status = status;
+        }
+    });
+
+    localStorage.setItem("complaints", JSON.stringify(complaints));
+    loadComplaints();
 }
 
 window.onload = loadComplaints;
