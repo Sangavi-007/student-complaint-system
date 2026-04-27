@@ -81,7 +81,7 @@ button:hover {
 <div class="container">
     <h2>Student details</h2>
 
-        <form action="save_student.php" method="POST" onsubmit="return validateForm()">
+        <form onsubmit="return saveStudent()">
         <label>Student name:</label>
         <input type="text" id="name" name="name" placeholder="Ex:Sam">
         <label>Register number :</label>
@@ -101,11 +101,12 @@ button:hover {
           <input type="number" id="contact" name="contact" placeholder= "Ex: 9876543210">
         <button type="submit">Submit</button><br><br>
 </form>
-        <button><a href="complaint.html">Next</a></button>
+        <p id = "output"></p>
+        <button class = "next-btn"><a href="complaint.html">Next</a></button>
         </div>
 
 <script>
-function validateForm() {
+function saveStudent() {
     let name = document.getElementById("name").value;
     let regno = document.getElementById("regno").value;
     let dept = document.getElementById("dept").value;
@@ -117,8 +118,31 @@ function validateForm() {
         return false;
     }
 
-    alert("Student details submitted successfully!");
-    return true;
+   let students = JSON.parse(localStorage.getItem("students")) || [];
+
+    let newStudent = {
+        id: Date.now(),   // unique ID
+        name: name,
+        regno: regno,
+        email: email,
+        dept: dept,
+        contact: contact
+    };
+
+    students.push(newStudent);
+    localStorage.setItem("students", JSON.stringify(students));
+
+    document.getElementById("output").innerHTML =
+        "✅ Saved! Your ID: " + newStudent.id;
+
+    // clear fields
+    document.getElementById("name").value = "";
+    document.getElementById("regno").value = "";
+    document.getElementById("mail").value = "";
+    document.getElementById("dept").value = "";
+    document.getElementById("contact").value = "";
+
+    return false; // prevent page reload
 }
 </script>
 

@@ -81,7 +81,7 @@ button:hover {
 <div class="container">
     <h2>Query details</h2>
 
-    <form action="save_complaint.php" method="POST" enctype="multipart/form-data" onsubmit="return validateForm()">
+    <form onsubmit="return saveComplaint()">
         <label>Complaint type:</label>
         <select name ="type" id="type">
             <option value="">Select Type</option>
@@ -97,26 +97,61 @@ button:hover {
          <textarea id="desc" name ="description" placeholder="Complete explanation of complaint"></textarea>
         <label>Attachment:</label><br>
         <small>File format: PDF,JPG,PNG (Max size:2MB)</small>
-         <input type="file" name = "file" accept=".pdf,.jpg,.png">
+         <input type="file" name = "file" id ="file" accept=".pdf,.jpg,.png">
          <button type="submit">Submit</button><br><br>
     </form>
+    <p id="output"></p>
          <button><a href="submit.html">Previous</a></button>
-</form>
 </div>
 
 <script>
-function validateForm() {
-    let name = document.getElementById("type").value;
+function saveComplaint() {
+    let type = document.getElementById("type").value;
     let loc = document.getElementById("loc").value;
     let desc = document.getElementById("desc").value;
+    let fileInput = document.getElementById("file");
+    let file = fileInput.files[0];
 
-    if (name === "" || loc === "" || desc === "") {
+    if (type === "" || loc === "" || desc === "") {
         alert("All fields are required!");
         return false;
     }
 
-    alert("Complaint submitted successfully!");
-    return true;
+    let students = JSON.parse(localStorage.getItem("students")) || [];
+    let lastStudent = students[students.length - 1];
+
+    if (!lastStudent) {
+        alert("No student data found! Fill student details first.");
+        return false;
+    }
+
+    let complaints = JSON.parse(localStorage.getItem("complaints")) || [];
+
+    let newComplaint = {
+        id: Date.now(),
+        studentId: lastStudent.id,
+        name: lastStudent.name,
+        email: lastStudent.email,
+        type: type,
+        location: loc,
+        description: desc,
+        fileName: file ? file.name : "No file",
+        status: "Pending"
+    };
+
+    complaints.push(newComplaint);
+    localStorage.setItem("complaints", JSON.stringify(complaints));
+
+    document.getElementById("output").innerHTML =
+        "✅ Complaint submitted!<br>Your Complaint ID: <b>" + newComplaint.id + "</b>";
+
+    // clear form
+    document.getElementById("type").value = "";
+    document.getElementById("loc").value = "";
+    document.getElementById("desc").value = "";
+    document.getElementById("file").value = "";
+
+    return false;
 }
 </script>
 
