@@ -125,7 +125,7 @@ function saveStudent() {
    let students = JSON.parse(localStorage.getItem("students")) || [];
 
     let newStudent = {
-        id: Date.now(),  
+       // id: Date.now(),  
         name: name,
         regno: regno,
         email: email,
@@ -137,7 +137,7 @@ function saveStudent() {
     localStorage.setItem("students", JSON.stringify(students));
 
     document.getElementById("output").innerHTML =
-        "✅ Saved! Your ID: " + newStudent.id;
+        "✅ Saved!";
 
     document.getElementById("name").value = "";
     document.getElementById("regno").value = "";
