@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset = "UTF-8">
+    <meta name = "viewport" content = "width=device-width, initial-scale = 1.0">
+    <title>Admin login</title>
+    <style>
+    textarea {
+    min-height: 90px;
+}
+*{
+    box-sizing: border-box;
+}
+body {
+    background: #eef2f7;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+ .background{
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: url("clg.jpeg") no-repeat center/cover;
+        filter: blur(5px);  
+        z-index: -1;
+ }
+
+.container {
+    width: 450px;
+    margin: auto;
+    margin-top: 80px;
+    background: rgba(255, 255, 255, 0.95);
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+input, select, textarea {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+    font-family: Arial, sans-serif;
+}
+#am{
+    display: block;
+    text-align: center;
+    margin-top: 15px;
+}
+#ad{
+    text-decoration: none;
+}
+input:focus, select:focus, textarea:focus {
+    border-color: #007bff;
+    outline: none;
+}
+button {
+    width: 100%;
+    padding: 12px;
+    background: linear-gradient(to right, #6a11cb, #2575fc);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button:hover {
+    transform: scale(1.05);
+    background: linear-gradient(to right, #0052cc, #00aaff);
+}
+    </style>
+</head>
+<body>
+<div class = "background"></div>
+<div class="container">
+<h2>Admin Login</h2>
+<form action="dash.html" onsubmit="return validateForm()">
+        <label>Enter Staff ID:</label>
+        <input type="number" id="name" placeholder="Ex:123456">
+        <label>Enter password:</label>
+        <input type="password" id="no" name="pswd" maxlength="10"><br>
+         <a id="am" href="signin.html">New user?Sign up</a><br>
+    <button type="submit">Submit</button>
+</form>
+</div>
+
+<script>
+    function validateForm() {
+    let name = document.getElementById("name").value;
+    let no = document.getElementById("no").value;
+
+    if (name === "" || no === "") {
+        alert("All fields are required!");
+        return false;
+    }
+
+    alert("Logined successfully!");
+    return true;
+}
+</script>
+</body>
+</html>
