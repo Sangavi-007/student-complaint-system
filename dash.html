@@ -96,7 +96,7 @@ tr:hover {
         <h3>Filter by Type</h3>
         <select onchange="filterType(this.value)">
             <option value="All">All</option>
-            <option>WiFi</option>
+            <option>Academic</option>
             <option>Classroom</option>
             <option>Hostel</option>
             <option>Transport</option>
@@ -143,7 +143,7 @@ function display(data) {
             <td>${c.id}</td>
             <td>${c.name}</td>
             <td>${c.type || "-"}</td>
-            <td>${c.complaint || "-"}</td>
+            <td>${c.description || "-"}</td>
             <td>
                 <select onchange="updateStatus(${c.id}, this.value)" class="${statusClass}">
                     <option ${c.status==="Pending"?"selected":""}>Pending</option>
