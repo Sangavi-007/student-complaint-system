@@ -5,7 +5,7 @@
     <meta name = "viewport" content = "width=device-width, initial-scale = 1.0">
     <title>Submit Complaint</title>
     <style>
-    textarea {
+textarea {
     min-height: 90px;
 }
 *{
@@ -124,8 +124,7 @@ function saveStudent() {
 
    let students = JSON.parse(localStorage.getItem("students")) || [];
 
-    let newStudent = {
-       // id: Date.now(),  
+    let newStudent = { 
         name: name,
         regno: regno,
         email: email,
