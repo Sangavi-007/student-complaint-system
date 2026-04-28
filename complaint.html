@@ -5,7 +5,7 @@
     <meta name = "viewport" content = "width=device-width, initial-scale = 1.0">
     <title>Submit Complaint</title>
     <style>
-    textarea {
+textarea {
     min-height: 90px;
 }
 *{
@@ -133,7 +133,6 @@ function saveComplaint() {
 
     let newComplaint = {
         id: Date.now(),
-        studentId: lastStudent.id,
         name: lastStudent.name,
         email: lastStudent.email,
         type: type,
@@ -149,7 +148,6 @@ function saveComplaint() {
     document.getElementById("output").innerHTML =
         "✅ Complaint submitted!<br>Your Complaint ID: <b>" + newComplaint.id + "</b>";
 
-    // clear form
     document.getElementById("type").value = "";
     document.getElementById("loc").value = "";
     document.getElementById("desc").value = "";
