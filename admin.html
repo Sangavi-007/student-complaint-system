@@ -86,9 +86,9 @@ button:hover {
 <div class = "background"></div>
 <div class="container">
 <h2>Admin Login</h2>
-<form action="dash.html" onsubmit="return validateForm()">
+<form action="dash.html" onsubmit="return login()">
         <label>Enter Staff Email:</label>
-        <input type="email" id="name" pattern="^[0-9]+@staff\.annauniv\.edu$" title="Use your staff mail ">
+        <input type="email" id="mail" pattern="^[0-9]+@staff\.annauniv\.edu$" title="Use your staff mail ">
         <label>Enter password:</label>
         <input type="password" id="no" name="pswd" maxlength="10"><br>
          <a id="am" href="signin.html">New user?Sign up</a><br>
@@ -97,18 +97,29 @@ button:hover {
 </div>
 
 <script>
-    function validateForm() {
-    let name = document.getElementById("name").value;
-    let no = document.getElementById("no").value;
 
-    if (name === "" || no === "") {
-        alert("All fields are required!");
-        return false;
+    function login() {
+      let name = document.getElementById("mail").value;
+      let no = document.getElementById("no").value;
+     const email = document.getElementById("mail").value;
+     const password = document.getElementById("no").value;
+
+     const storedEmail = localStorage.getItem("adminEmail");
+     const storedPassword = localStorage.getItem("adminPassword");
+     if (name != "" && no != "") {
+         if (email === storedEmail && password === storedPassword) {
+            alert("Login success");
+             return true;
+   }
+  else {
+    alert("Invalid credentials");
+    return false;
+  }
+}
+alert ("All fields are required");
+return false;
     }
 
-    alert("Logined successfully!");
-    return true;
-}
 </script>
 </body>
 </html>

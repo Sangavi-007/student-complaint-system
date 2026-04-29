@@ -81,7 +81,8 @@ button:hover {
 <div class="container">
     <h2>Admin Sign up</h2>
 
-    <form action="admin.html" onsubmit="return validateForm()">
+    <form action="admin.html" onsubmit="return validateForm() && signup()" >
+    
         <label>Full name:</label>
         <input type="text" id="name" placeholder="Ex:Vijay">
         <label>Staff ID:</label>
@@ -116,7 +117,7 @@ function validateForm() {
     let contact = document.getElementById("contact").value;
     let password = document.getElementById("pass").value;
     let cpassword = document.getElementById("cpass").value;
-    if (name === "" || dept === "" || mail === "" || contact === "" || no ===""|| password ===""|| cpassword ==="") {
+    if (name === "" || dept === "" || email === "" || contact === "" || no ===""|| password ===""|| cpassword ==="") {
         alert("All fields are required!");
         return false;
     }
@@ -127,6 +128,18 @@ function validateForm() {
     alert("Details submitted successfully!");
     return true;
 }
+function signup() {
+  const email = document.getElementById("mail").value;
+  const password = document.getElementById("pass").value;
+
+
+  localStorage.setItem("adminEmail", email);
+  localStorage.setItem("adminPassword", password);
+
+  alert("Signup successful");
+  return true;
+}
+
 </script>
 
 </body>
