@@ -87,8 +87,8 @@ button:hover {
 <div class="container">
 <h2>Admin Login</h2>
 <form action="dash.html" onsubmit="return validateForm()">
-        <label>Enter Staff ID:</label>
-        <input type="number" id="name" placeholder="Ex:123456">
+        <label>Enter Staff Email:</label>
+        <input type="email" id="name" pattern="^[0-9]+@staff\.annauniv\.edu$" title="Use your staff mail ">
         <label>Enter password:</label>
         <input type="password" id="no" name="pswd" maxlength="10"><br>
          <a id="am" href="signin.html">New user?Sign up</a><br>
